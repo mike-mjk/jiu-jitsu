@@ -1,4 +1,4 @@
-var MOCK_ARMBAR_VIDEOS = {
+var MOCK_VIDEOS = {
     videos: [
         {
             id: "UNr5uyJ5fKM",
@@ -33,7 +33,7 @@ var MOCK_ARMBAR_VIDEOS = {
 function getCategoryVideos(callbackFn) {
     // we use a `setTimeout` to make this asynchronous
     // as it would be with a real AJAX call.
-	setTimeout(function(){ callbackFn(MOCK_ARMBAR_VIDEOS)}, 1);
+	setTimeout(function(){ callbackFn(MOCK_VIDEOS)}, 1);
 }
 
 // this function stays the same when we connect
@@ -43,7 +43,7 @@ function displayCategoryVideos(data) {
         var cat = data.videos[index].category;
         var correctList = $('#' + cat);
 	    correctList.append(
-        '<li>' + data.videos[index].vidTitle + '<br />' + data.videos[index].channelTitle + '<br />' + '<a href="https://www.youtube.com/watch?v=' + data.videos[index].id +'"><img src=' + data.videos[index].thumbnail + '>' + '</a></li>');
+        '<li id="' + data.videos[index].id + '">' + data.videos[index].vidTitle + '<br />' + data.videos[index].channelTitle + '<br />' + '<a href="/' + data.videos[index].id +'"><img src=' + data.videos[index].thumbnail + '>' + '</a></li>');
     }
 }
 
@@ -52,6 +52,15 @@ function displayCategoryVideos(data) {
 function getAndDisplayVideos() {
 	getCategoryVideos(displayCategoryVideos);
 }
+
+
+$('ul').on('click', 'li', function(){
+    var id = $(this).attr('id');
+    $('#ytplayer').attr('src', 'https://www.youtube.com/embed/' + id);
+});
+
+
+
 
 //  on page load do this
 $(function() {
