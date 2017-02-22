@@ -1,0 +1,18 @@
+body {
+    font-family: 'Lato', sans-serif;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+#submit-link {
+    width: 90%;
+    margin-top: 20px;
+}
+
+
+.submit {
+    width: 9%;
+}

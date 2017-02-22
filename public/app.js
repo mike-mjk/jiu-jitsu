@@ -43,7 +43,8 @@ function displayCategoryVideos(data) {
         var cat = data.videos[index].category;
         var correctList = $('#' + cat);
 	    correctList.append(
-        '<li id="' + data.videos[index].id + '">' + data.videos[index].vidTitle + '<br />' + data.videos[index].channelTitle + '<br />' + '<a href="/' + data.videos[index].id +'"><img src=' + data.videos[index].thumbnail + '>' + '</a></li>');
+        '<li id="' + data.videos[index].id + '">' + data.videos[index].vidTitle + '<br />' + data.videos[index].channelTitle + '<br /> <img src=' + data.videos[index].thumbnail + '>' + '</li>');
+        //'<a href="/' + data.videos[index].id +'">  </a>
     }
 }
 
