@@ -2,6 +2,11 @@ var express = require('express');
 var app = express();
 app.use(express.static('public'));
 
+var mustacheExpress = require('mustache-express'); 
+app.engine('html', mustacheExpress());
+app.set('view engine', 'mustache'); 
+app.set('views', __dirname + '/public');
+
 var MOCK_VIDEOS = {
     videos: [
         {
@@ -42,9 +47,13 @@ app.get('/videos/:id', function(req, res) {
 });
 
 
-// app.get('/:id', function(req, res){
-//     res.sendFile(__dirname + '/public/video.html');
-// });
+app.get('/:id', function(req, res){
+    // var fs = require('fs');
+    // res.send(fs.readFileSync(__dirname + '/public/video.html', 'utf8').replace('{{videoID}}', req.params.id));
+    res.render('video.html', {
+        videoID: req.params.id
+    });
+});
 
 exports.app = app;
 app.listen(process.env.PORT || 8080);
