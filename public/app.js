@@ -38,12 +38,25 @@ function getCategoryVideos(callbackFn) {
 
 // this function stays the same when we connect
 // to real API later
+// The commented out version below contains code for appending to correct category and is also messy
+//function displayCategoryVideos(data) {
+//     for (index in data.videos) {
+//         var cat = data.videos[index].category;
+//         var correctList = $('#' + cat);
+// 	    correctList.append(
+//         '<li id="' + data.videos[index].id + '">' + data.videos[index].vidTitle + '<br />' + data.videos[index].channelTitle + '<br />' + '<a href="/' + data.videos[index].id +'"><img src=' + data.videos[index].thumbnail + '>' + '</a></li>');
+//     }
+// }
+
+// this function stays the same when we connect
+// to real API later (version without categories and hopefully not messy)
 function displayCategoryVideos(data) {
+    var correctList = $('#added-videos');
     for (index in data.videos) {
-        var cat = data.videos[index].category;
-        var correctList = $('#' + cat);
-	    correctList.append(
-        '<li id="' + data.videos[index].id + '">' + data.videos[index].vidTitle + '<br />' + data.videos[index].channelTitle + '<br />' + '<a href="/' + data.videos[index].id +'"><img src=' + data.videos[index].thumbnail + '>' + '</a></li>');
+        //var cat = data.videos[index].category;
+        
+        var thumbnailLink = '<a href="/' + data.videos[index].id + '"><img src=' + data.videos[index].thumbnail + '></a>';
+	    correctList.append('<li>' + thumbnailLink + '</li>');
     }
 }
 
@@ -54,10 +67,10 @@ function getAndDisplayVideos() {
 }
 
 
-$('ul').on('click', 'li', function(){
-    var id = $(this).attr('id');
-    $('#ytplayer').attr('src', 'https://www.youtube.com/embed/' + id);
-});
+// $('ul').on('click', 'li', function(){
+//     var id = $(this).attr('id');
+//     $('#ytplayer').attr('src', 'https://www.youtube.com/embed/' + id);
+// });
 
 
 
