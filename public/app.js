@@ -55,7 +55,7 @@ function displayCategoryVideos(data) {
     for (index in data.videos) {
         //var cat = data.videos[index].category;
         
-        var thumbnailLink = '<a href="/' + data.videos[index].id + '"><img src=' + data.videos[index].thumbnail + '></a>';
+        var thumbnailLink = '<a href="/watch/' + data.videos[index].id + '"><img src=' + data.videos[index].thumbnail + '></a>';
 	    correctList.append('<li>' + thumbnailLink + '</li>');
     }
 }
