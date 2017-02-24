@@ -12,6 +12,45 @@ app.engine('html', mustacheExpress());
 app.set('view engine', 'mustache'); 
 app.set('views', __dirname + '/public');
 
+// Routes ------------------------------------
+var Video = require('./models/video');
+
+app.get('/videos', function(req, res){
+    Video.find(function(err, videos) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        res.json(videos);
+    });
+});
+
+app.post('/videos', function(req, res){
+    Video.create({
+        id: req.body.id,
+        title: req.body.title,
+        channelTitle: req.body.channelTitle,
+        thumbnail: req.body.thumbnail,
+        description: req.body.description,
+        tags: req.body.tags
+    }, function(err, video) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        res.status(201).json(video);
+    });
+});
+
+app.get('/watch/:id', function(req, res){
+    res.render('video.html', {
+        videoID: req.params.id
+    });
+});
+//-------------------------------------------------
+
 var runServer = function(callback) {
     mongoose.connect(config.DATABASE_URL, function(err) {
         if (err && callback) {
@@ -35,12 +74,7 @@ if (require.main === module) {
     });
 }
 
-app.get('/watch/:id', function(req, res){
-    res.render('video.html', {
-        videoID: req.params.id
-    });
-});
 
 exports.app = app;
 exports.runServer = runServer;
-app.listen(process.env.PORT || 8080);
+//app.listen(process.env.PORT || 8080);
