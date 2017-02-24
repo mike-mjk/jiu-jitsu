@@ -6,7 +6,9 @@ var MOCK_VIDEOS = {
             channelTitle: "Carnage BJJ",
             thumbnail: "https://i.ytimg.com/vi/UNr5uyJ5fKM/mqdefault.jpg",
             description: "description text 1",
-            tags: ['tag1', 'tag2', 'tag3']
+            tags: ['tag1', 'tag2', 'tag3'],
+            submitter: 'firstname lastname',
+            dateAdded: 1487961653997
         },
         {
             id: "kkHzgDaSkHY",
@@ -83,10 +85,20 @@ function getDataFromApi(videoId) {
 		part: 'snippet',
 		r: 'json',
 		key: 'AIzaSyCIdQfwZ7qDSA1BhnfzEBa-6AB8ma8YY9k'
-	}
-	$.getJSON(baseURL, query, function(data) {
-	    createVideoObject(data);
-	});
+	};
+	
+	var p = new Promise(function(resolve, reject) {
+	    if ($.getJSON(baseURL, query, function(data) {
+	        createVideoObject(data);
+	    })) {
+        resolve(console.log('success'));  // fulfilled successfully
+        }
+        else {
+        reject(console.log('fail'));  // error, rejected
+        }
+    });
+    p.then(getAndDisplayVideos());
+	
 }
 
 function onSubmit() {
@@ -96,7 +108,6 @@ function onSubmit() {
         videoId = videoId.trim();
         videoId = videoId.slice(-11);
         getDataFromApi(videoId);
-        getAndDisplayVideos();
     })
 }
 
