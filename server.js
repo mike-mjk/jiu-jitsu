@@ -27,6 +27,7 @@ app.get('/videos', function(req, res){
 });
 
 app.post('/videos', function(req, res){
+    console.log(req);
     Video.create({
         id: req.body.id,
         title: req.body.title,

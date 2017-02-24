@@ -74,9 +74,15 @@ function createVideoObject(data) {
         video.description = data.items[0].snippet.description;
         video.tags = data.items[0].snippet.tags;
         
-        MOCK_VIDEOS.videos.push(video);
-        console.log(MOCK_VIDEOS);
+        
+        
+        
+        //code to push directly to mock videos
+        //MOCK_VIDEOS.videos.push(video);
+        //console.log(MOCK_VIDEOS);
     }
+    //attempt to pass video object to ajax post
+    return video;
 }
 
 function getDataFromApi(videoId) {
@@ -86,28 +92,39 @@ function getDataFromApi(videoId) {
 		r: 'json',
 		key: 'AIzaSyCIdQfwZ7qDSA1BhnfzEBa-6AB8ma8YY9k'
 	};
-	
-	var p = new Promise(function(resolve, reject) {
-	    if ($.getJSON(baseURL, query, function(data) {
-	        createVideoObject(data);
-	    })) {
-        resolve(console.log('success'));  // fulfilled successfully
-        }
-        else {
-        reject(console.log('fail'));  // error, rejected
-        }
+	//attempt to pass video object to ajax post
+	var video;
+	$.getJSON(baseURL, query, function(data) {
+	    //attempt to pass video object to ajax post
+ 	    video = createVideoObject(data);
+ 	});
+ 	//attempt to pass video object to ajax post
+ 	return video;
+}
+
+//attempt to pass video object to ajax post
+function addVideo(video) {
+        $.ajax('/videos', {
+        type: 'POST',
+        data: JSON.stringify(video),
+        dataType: 'json',
+        contentType: 'application/json'
     });
-    p.then(getAndDisplayVideos());
-	
 }
 
 function onSubmit() {
     $('#add-video-form').on('submit', function(e){
         e.preventDefault();
+        //attempt to pass video object to ajax post
+        var video;
         var videoId = $(this).find('#add-video-input').val();
         videoId = videoId.trim();
         videoId = videoId.slice(-11);
-        getDataFromApi(videoId);
+        //attempt to pass video object to ajax post
+        video = getDataFromApi(videoId);
+        addVideo(video);
+        
+        getAndDisplayVideos();
     })
 }
 
