@@ -5,6 +5,7 @@ var mongoose = require('mongoose');
 var config = require('./config');
 
 var app = express();
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
 var mustacheExpress = require('mustache-express'); 
@@ -27,6 +28,7 @@ app.get('/videos', function(req, res){
 });
 
 app.post('/videos', function(req, res){
+    
     console.log(req.body);
     Video.create({
         id: req.body.id,
