@@ -54,7 +54,6 @@ app.delete('/videos/:id', function(req, res) {
         }
         res.status(201).json(item);
     });
-    
 });
 
 app.get('/watch/:id', function(req, res){

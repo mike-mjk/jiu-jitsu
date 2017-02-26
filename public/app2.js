@@ -72,8 +72,8 @@ function onSubmit() {
 }
 
 //Performs getJSON on youtube API and passes response and addVideo function to createVideoObject
-var baseURL = 'https://www.googleapis.com/youtube/v3/videos';
 function getDataFromApi(videoId) {
+    var baseURL = 'https://www.googleapis.com/youtube/v3/videos';
 	var query = {
 		id: videoId,
 		part: 'snippet',
