@@ -20,13 +20,3 @@ describe('root', function() {
     });
     
 });
-
-// describe('Shopping List', function() {
-//     it('should list items on GET', function(done) {
-//         chai.request(app)
-//             .get('/items')
-//             .end(function(err, res) {
-//                 res.should.have.status(200);
-//                 done();
-//             });
-//     });
