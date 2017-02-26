@@ -29,12 +29,7 @@ var MOCK_VIDEOS = {
         ]
 };
 
-// this function's name and argument can stay the
-// same after we have a live API, but its internal
-// implementation will change. Instead of using a
-// timeout function that returns mock data, it will
-// use jQuery's AJAX functionality to make a call
-// to the server and then run the callbackFn
+//does an ajax call and passes response to displayCategoryVideos
 function getCategoryVideos(callbackFn) {
 	$.ajax('/videos', {
         type: 'GET',
@@ -45,11 +40,8 @@ function getCategoryVideos(callbackFn) {
     });
 }
 
-// this function stays the same when we connect
-// to real API later (version without categories and hopefully not messy)
+//creates HTML used to display videos
 function displayCategoryVideos(data) {
-    console.log('here');
-    console.log(data);
     var correctList = $('#added-videos');
     correctList.html("");
     for (index in data) {
@@ -62,66 +54,13 @@ function displayCategoryVideos(data) {
     }
 }
 
-// this function can stay the same even when we
-// are connecting to real API
+//runs the get and display functions on document load
 function getAndDisplayVideos() {
-    console.log('I ran');
 	getCategoryVideos(displayCategoryVideos);
 }
 
-var baseURL = 'https://www.googleapis.com/youtube/v3/videos'
 
-//takes a youtube video resource and adds video object to mock videos array
-function createVideoObject(data, cb) {
-    if (data.items.length == 1) {
-        var video = {};
-        
-        video.id = data.items[0].id;
-        video.title = data.items[0].snippet.title;
-        video.channelTitle = data.items[0].snippet.channelTitle;
-        video.thumbnail = data.items[0].snippet.thumbnails.medium.url;
-        video.description = data.items[0].snippet.description;
-        video.tags = data.items[0].snippet.tags;
-        console.log('createVideoObject');
-        console.log(video);
-        cb(video, getAndDisplayVideos);
-        
-        
-        //code to push directly to mock videos
-        //MOCK_VIDEOS.videos.push(video);
-        //console.log(MOCK_VIDEOS);
-    }
-}
-
-function getDataFromApi(videoId) {
-	var query = {
-		id: videoId,
-		part: 'snippet',
-		r: 'json',
-		key: 'AIzaSyCIdQfwZ7qDSA1BhnfzEBa-6AB8ma8YY9k'
-	};
-	$.getJSON(baseURL, query, function(data) {
-	    console.log('getjson');
-	    console.log(data);
- 	    createVideoObject(data, addVideo);
- 	});
-}
-
-function addVideo(video, cb) {
-        console.log('addvideo');
-        console.log(video);
-        $.ajax('/videos', {
-        type: 'POST',
-        data: JSON.stringify(video),
-        dataType: 'json',
-        contentType: 'application/json'
-    })
-    .done(function(){
-        console.log('done');
-        cb();
-    })
-}
-
+//adds event listener to add video form and passes videoId to GetDataFromApi
 function onSubmit() {
     $('#add-video-form').on('submit', function(e){
         e.preventDefault();
@@ -132,10 +71,57 @@ function onSubmit() {
     })
 }
 
+//Performs getJSON on youtube API and passes response and addVideo function to createVideoObject
+var baseURL = 'https://www.googleapis.com/youtube/v3/videos';
+function getDataFromApi(videoId) {
+	var query = {
+		id: videoId,
+		part: 'snippet',
+		r: 'json',
+		key: 'AIzaSyCIdQfwZ7qDSA1BhnfzEBa-6AB8ma8YY9k'
+	};
+	$.getJSON(baseURL, query, function(data) {
+ 	    createVideoObject(data, addVideo);
+ 	});
+}
+
+//transforms API response into video object and passes it and getAndDisplayVideos callback to addVideo function
+function createVideoObject(data, addVideo) {
+    if (data.items.length == 1) {
+        var video = {};
+        
+        video.id = data.items[0].id;
+        video.title = data.items[0].snippet.title;
+        video.channelTitle = data.items[0].snippet.channelTitle;
+        video.thumbnail = data.items[0].snippet.thumbnails.medium.url;
+        video.description = data.items[0].snippet.description;
+        video.tags = data.items[0].snippet.tags;
+        addVideo(video, getAndDisplayVideos);
+    }
+    else {
+        alert('Not a valid video link');
+    }
+}
+
+// performs ajax post to /videos route to add video to mongo and reruns getAndDisplayVideos
+function addVideo(video, getAndDisplayVideos) {
+        console.log('addvideo');
+        console.log(video);
+        $.ajax('/videos', {
+        type: 'POST',
+        data: JSON.stringify(video),
+        dataType: 'json',
+        contentType: 'application/json'
+    })
+    .done(function(){
+        getAndDisplayVideos();
+    });
+}
+
+
 //  on page load do this
 $(function() {
 	getAndDisplayVideos();
 	onSubmit();
-	//getDataFromApi('UNr5uyJ5fKM')
 });
 
