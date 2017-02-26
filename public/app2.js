@@ -36,27 +36,36 @@ var MOCK_VIDEOS = {
 // use jQuery's AJAX functionality to make a call
 // to the server and then run the callbackFn
 function getCategoryVideos(callbackFn) {
-    // we use a `setTimeout` to make this asynchronous
-    // as it would be with a real AJAX call.
-	setTimeout(function(){ callbackFn(MOCK_VIDEOS)}, 1);
-	
+	$.ajax('/videos', {
+        type: 'GET',
+        dataType: 'json'
+    })
+    .done(function(data){
+        callbackFn(data);
+    });
 }
 
 // this function stays the same when we connect
 // to real API later (version without categories and hopefully not messy)
 function displayCategoryVideos(data) {
+    console.log('here');
+    console.log(data);
     var correctList = $('#added-videos');
-    for (index in data.videos) {
-        //var cat = data.videos[index].category;
+    correctList.html("");
+    for (index in data) {
+        //var cat = data[index].category;
         
-        var thumbnailLink = '<a href="/watch/' + data.videos[index].id + '"><img src=' + data.videos[index].thumbnail + '></a>';
-	    correctList.append('<li>' + thumbnailLink + '</li>');
+        var thumbnailLink = '<a href="/watch/' + data[index].id + '"><img src=' + data[index].thumbnail + '></a>';
+	    var mongoId = data[index]._id;
+        console.log(mongoId);
+	    correctList.append('<li id="' + mongoId + '">' + thumbnailLink + '</li>');
     }
 }
 
 // this function can stay the same even when we
 // are connecting to real API
 function getAndDisplayVideos() {
+    console.log('I ran');
 	getCategoryVideos(displayCategoryVideos);
 }
 
@@ -75,7 +84,7 @@ function createVideoObject(data, cb) {
         video.tags = data.items[0].snippet.tags;
         console.log('createVideoObject');
         console.log(video);
-        cb(video);
+        cb(video, getAndDisplayVideos);
         
         
         //code to push directly to mock videos
@@ -98,7 +107,7 @@ function getDataFromApi(videoId) {
  	});
 }
 
-function addVideo(video) {
+function addVideo(video, cb) {
         console.log('addvideo');
         console.log(video);
         $.ajax('/videos', {
@@ -106,7 +115,11 @@ function addVideo(video) {
         data: JSON.stringify(video),
         dataType: 'json',
         contentType: 'application/json'
-    });
+    })
+    .done(function(){
+        console.log('done');
+        cb();
+    })
 }
 
 function onSubmit() {
@@ -116,9 +129,6 @@ function onSubmit() {
         videoId = videoId.trim();
         videoId = videoId.slice(-11);
         getDataFromApi(videoId);
-        //addVideo(video);
-        
-        //getAndDisplayVideos();
     })
 }
 

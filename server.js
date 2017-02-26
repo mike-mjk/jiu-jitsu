@@ -28,8 +28,6 @@ app.get('/videos', function(req, res){
 });
 
 app.post('/videos', function(req, res){
-    
-    console.log(req.body);
     Video.create({
         id: req.body.id,
         title: req.body.title,
@@ -45,6 +43,18 @@ app.post('/videos', function(req, res){
         }
         res.status(201).json(video);
     });
+});
+
+app.delete('/videos/:id', function(req, res) {
+    Item.remove({_id: req.params.id}, function(err, item) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        res.status(201).json(item);
+    });
+    
 });
 
 app.get('/watch/:id', function(req, res){

@@ -50,7 +50,9 @@ function displayCategoryVideos(data) {
         //var cat = data.videos[index].category;
         
         var thumbnailLink = '<a href="/watch/' + data.videos[index].id + '"><img src=' + data.videos[index].thumbnail + '></a>';
-	    correctList.append('<li>' + thumbnailLink + '</li>');
+        var mongoId = data.videos[index]._id
+        console.log(mongoId)
+	    correctList.append('<li id="' + mongoId + '">' + thumbnailLink + '</li>');
     }
 }
 
