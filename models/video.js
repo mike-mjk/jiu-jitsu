@@ -1,7 +1,7 @@
 var mongoose = require('mongoose');
 
 var VideoSchema = new mongoose.Schema({
-    id: { type: String, required: true },
+    id: { type: String, required: true, unique: true },
     title: { type: String, required: true },
     channelTitle: { type: String, required: true },
     thumbnail: { type: String, required: true },

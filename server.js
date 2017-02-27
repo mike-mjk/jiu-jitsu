@@ -46,7 +46,8 @@ app.post('/videos', function(req, res){
 });
 
 app.delete('/videos/:id', function(req, res) {
-    Item.remove({_id: req.params.id}, function(err, item) {
+    console.log('delete ran');
+    Video.remove({id: req.params.id}, function(err, item) {
         if (err) {
             return res.status(500).json({
                 message: 'Internal Server Error'

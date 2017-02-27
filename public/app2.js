@@ -40,18 +40,19 @@ function getCategoryVideos(callbackFn) {
     });
 }
 
-//creates HTML used to display videos
+//runs template() from handlebars.js on videos in mongo
 function displayCategoryVideos(data) {
-    var correctList = $('#added-videos');
-    correctList.html("");
-    for (index in data) {
-        //var cat = data[index].category;
+    template(data);
+    // var correctList = $('#added-videos');
+    // correctList.html("");
+    // for (index in data) {
+    //     //var cat = data[index].category;
         
-        var thumbnailLink = '<a href="/watch/' + data[index].id + '"><img src=' + data[index].thumbnail + '></a>';
-	    var mongoId = data[index]._id;
-        console.log(mongoId);
-	    correctList.append('<li id="' + mongoId + '">' + thumbnailLink + '</li>');
-    }
+    //     var thumbnailLink = '<a href="/watch/' + data[index].id + '"><img src=' + data[index].thumbnail + '></a>';
+	   // var mongoId = data[index]._id;
+    //     console.log(mongoId);
+	   // correctList.append('<li id="' + mongoId + '">' + thumbnailLink + '</li>');
+    // }
 }
 
 //runs the get and display functions on document load
