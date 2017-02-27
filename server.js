@@ -17,7 +17,7 @@ app.set('views', __dirname + '/public');
 var Video = require('./models/video');
 
 app.get('/videos', function(req, res){
-    Video.find(function(err, videos) {
+    Video.find().sort({ _id: 'desc' }).exec(function(err, videos) {
         if (err) {
             return res.status(500).json({
                 message: 'Internal Server Error'
