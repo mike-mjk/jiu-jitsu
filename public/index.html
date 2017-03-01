@@ -62,18 +62,18 @@
   </div>
   
   <script id="video-template" type="text/x-handlebars-template">
-  <ol>
-    {{#each videos}} 
-    <li>
-      <div>
-        <a href="/watch/{{id}}"> <span>{{title}}</span> <span>{{channelTitle}}</span></a>
-      </div>
-      <div>
-        <a href="/watch/{{id}}"><span><img src="{{thumbnail}}"></span></a>
-      </div>
-    </li>
-    {{/each}}
-  </ol>
+    <ol>
+      {{#each videos}} 
+      <li>
+        <div class="col-xs-7">
+          <a href="/watch/{{id}}"><span><img class="width-100" src="{{thumbnail}}"></span></a>
+        </div>
+        <div class="col-xs-5">
+          <a href="/watch/{{id}}"> <span>{{title}}</span> <span>{{channelTitle}}</span></a>
+        </div>
+      </li>
+      {{/each}}
+    </ol>
   </script>
 
   <!--Your new content will be displayed in here-->

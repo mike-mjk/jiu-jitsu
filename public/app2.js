@@ -69,8 +69,9 @@ function onSubmit() {
         videoId = videoId.trim();
         videoId = videoId.slice(-11);
         getDataFromApi(videoId);
-    })
+    });
 }
+
 
 //Performs getJSON on youtube API and passes response and addVideo function to createVideoObject
 function getDataFromApi(videoId) {
