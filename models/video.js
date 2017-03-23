@@ -7,6 +7,7 @@ var VideoSchema = new mongoose.Schema({
     thumbnail: { type: String, required: true },
     description: { type: String, required: true },
     tags: { type: Array, required: true },
+    userDescription: {type: String, required: false }
     //submitter: { type: String, required: true },
     //dateAdded: { type: Number, required: true }
 });

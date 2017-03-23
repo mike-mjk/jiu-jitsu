@@ -30,7 +30,7 @@
         
         <div class="collapse navbar-collapse" id="hamburger-navigation">
           
-          <form class="navbar-form navbar-left" role="search">
+          <form class="navbar-form navbar-left no-padding-lr" role="search">
             <div class="form-group">
               <input type="text" class="form-control" placeholder="Search">
             </div>
@@ -62,18 +62,22 @@
   </div>
   
   <script id="video-template" type="text/x-handlebars-template">
+  <div class="container"
     <ol>
       {{#each videos}} 
       <li>
-        <div class="col-xs-7">
+      <div class="row">
+        <div class="col-xs-5 no-padding-lr">
           <a href="/watch/{{id}}"><span><img class="width-100" src="{{thumbnail}}"></span></a>
         </div>
-        <div class="col-xs-5">
-          <a href="/watch/{{id}}"> <span>{{title}}</span> <span>{{channelTitle}}</span></a>
+        <div class="col-xs-7">
+          <a href="/watch/{{id}}"> <div class="two-lines"><span class="title">{{title}}</span></div> <span class="channel-title">{{channelTitle}}</span></a>
         </div>
+      </div>
       </li>
       {{/each}}
     </ol>
+  </div>
   </script>
 
   <!--Your new content will be displayed in here-->

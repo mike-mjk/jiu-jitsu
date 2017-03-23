@@ -7,7 +7,7 @@
     
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
-    <link rel="stylesheet" href="main.css" type="text/css" />
+    <link rel="stylesheet" href="../main.css" type="text/css" />
     
     <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:400,500" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat" rel="stylesheet">
@@ -45,7 +45,12 @@
     </div>
   </nav>
   
-  <iframe id="ytplayer" type="text/html" width="720" height="405" src="https://www.youtube.com/embed/{{videoID}}" frameborder="0" allowfullscreen></iframe>
+  <div class="auto-size-container">
+    <iframe id="ytplayer" type="text/html" class="auto-size-video" src="https://www.youtube.com/embed/{{videoID}}" frameborder="0" allowfullscreen></iframe>
+  </div>
+  
+  <div class="auto-size-container"></div>
+  <input type="text" placeholder="Add description here">
 
 </body>
 </html>
