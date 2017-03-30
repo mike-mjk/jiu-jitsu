@@ -18,7 +18,7 @@ function submitDescription() {
         
         $.ajax('/videos/'+ id + '/description', {
         type: 'PUT',
-        data: JSON.stringify(thing),
+        data: JSON.stringify(description),
         dataType: 'json',
         contentType: 'application/json'
     })
