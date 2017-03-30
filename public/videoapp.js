@@ -1,11 +1,11 @@
-function getDescription() {
-    $.ajax('../videos', {
+function getDescription(id) {
+    $.ajax('../videos/' + id, {
         type: 'GET',
         datatype: 'json'
     })
     .done(function(data){
         console.log(data);
-        $('#add-description-input').val(data)
+        $('#add-description-input').val(data.userDescription)
     });
 }
 
@@ -24,13 +24,16 @@ function submitDescription() {
     })
     
     .done(function(){
-        getDescription();
+        var id = $('#add-description-input').data('id');
+        console.log(id);
+        getDescription(id);
     });
     
     });
 }
 
 $(function() {
-    getDescription();
+    var id = $('#add-description-input').data('id');
+    getDescription(id);
     submitDescription();
 })

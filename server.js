@@ -57,6 +57,17 @@ app.put('/videos/:id/:field', function(req, res) {
     res.status(201).json({updated: true});
 });
 
+app.get('/videos/:id', function(req, res) {
+    Video.findOne({id: req.params.id}, function(err, video) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        res.status(201).json(video);
+    });
+});
+
 app.delete('/videos/:id', function(req, res) {
     console.log('delete ran');
     Video.remove({id: req.params.id}, function(err, item) {
