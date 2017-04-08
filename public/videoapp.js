@@ -32,8 +32,40 @@ function submitDescription() {
     });
 }
 
+//copied from app2.js... better to export?
+function getCategoryVideos(callbackFn) {
+	$.ajax('../videos', {
+        type: 'GET',
+        dataType: 'json'
+    })
+    .done(function(data){
+        callbackFn(data);
+    });
+}
+
+//runs template() from handlebars.js on videos in mongo
+function displayCategoryVideos(data) {
+    template(data);
+    // var correctList = $('#added-videos');
+    // correctList.html("");
+    // for (index in data) {
+    //     //var cat = data[index].category;
+        
+    //     var thumbnailLink = '<a href="/watch/' + data[index].id + '"><img src=' + data[index].thumbnail + '></a>';
+	   // var mongoId = data[index]._id;
+    //     console.log(mongoId);
+	   // correctList.append('<li id="' + mongoId + '">' + thumbnailLink + '</li>');
+    // }
+}
+
+//runs the get and display functions on document load
+function getAndDisplayVideos() {
+	getCategoryVideos(displayCategoryVideos);
+}
+
 $(function() {
     var id = $('#add-description-input').data('id');
     getDescription(id);
     submitDescription();
+    getAndDisplayVideos();
 })

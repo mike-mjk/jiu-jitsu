@@ -8,8 +8,6 @@ function template(videos) {
   // Define our data object
   var context={
       videos
-    // "videoId": "UNr5uyJ5fKM",
-    // "thumbnail": "https://i.ytimg.com/vi/UNr5uyJ5fKM/mqdefault.jpg",
   };
 
   // Pass our data to the template

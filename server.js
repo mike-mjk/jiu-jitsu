@@ -82,7 +82,8 @@ app.delete('/videos/:id', function(req, res) {
 
 app.get('/watch/:id', function(req, res){
     res.render('video.html', {
-        videoID: req.params.id
+        videoID: req.params.id,
+        curly: "{{"
     });
 });
 //-------------------------------------------------
