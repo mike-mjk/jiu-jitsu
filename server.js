@@ -17,7 +17,7 @@ app.set('views', __dirname + '/public');
 var Video = require('./models/video');
 
 app.get('/videos', function(req, res){
-    Video.find(function(err, videos) {
+    Video.find().sort({ _id: 'desc' }).exec(function(err, videos) {
         if (err) {
             return res.status(500).json({
                 message: 'Internal Server Error'
@@ -45,8 +45,32 @@ app.post('/videos', function(req, res){
     });
 });
 
+app.put('/videos/:id/:field', function(req, res) {
+    console.log(req.params);
+    console.log(req.body);
+    if (req.params.field == 'description') {
+        Video.findOne({ id: req.params.id }, function (err, video){
+          video.userDescription = req.body.description;
+          video.save();
+});
+    }
+    res.status(201).json({updated: true});
+});
+
+app.get('/videos/:id', function(req, res) {
+    Video.findOne({id: req.params.id}, function(err, video) {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            });
+        }
+        res.status(201).json(video);
+    });
+});
+
 app.delete('/videos/:id', function(req, res) {
-    Item.remove({_id: req.params.id}, function(err, item) {
+    console.log('delete ran');
+    Video.remove({id: req.params.id}, function(err, item) {
         if (err) {
             return res.status(500).json({
                 message: 'Internal Server Error'
@@ -58,7 +82,8 @@ app.delete('/videos/:id', function(req, res) {
 
 app.get('/watch/:id', function(req, res){
     res.render('video.html', {
-        videoID: req.params.id
+        videoID: req.params.id,
+        curly: "{{"
     });
 });
 //-------------------------------------------------

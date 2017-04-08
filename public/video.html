@@ -2,10 +2,102 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Video</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Jiu-Jitsu Tube</title>
+    
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="../main.css" type="text/css" />
+    
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab|Roboto:400,500" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Lato|Montserrat" rel="stylesheet">
 </head>
 <body>
-  <iframe id="ytplayer" type="text/html" width="720" height="405" src="https://www.youtube.com/embed/{{videoID}}" frameborder="0" allowfullscreen></iframe>
+  <nav class='navbar navbar-default'>
+    <div class='container'>
+        <div class="navbar-header">
+          <a href="/index.html" class="navbar-brand">Jiu-Jitsu Tube</a>
+          
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#hamburger-navigation">
+           <span class="sr-only">Navigation toggle</span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+           <span class="icon-bar"></span>
+         </button>
+          
+        </div>
+        
+        <div class="collapse navbar-collapse" id="hamburger-navigation">
+          
+          <form class="navbar-form navbar-left" role="search">
+            <div class="form-group">
+              <input type="text" class="form-control" placeholder="Search">
+            </div>
+            <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+          
+          <ul class="nav navbar-nav" role="menu">
+            <li><a href="#" >Sign In</a></li>
+            <li><a href="#">Sign Up</a></li>
+          </ul>
+        </div>
+        
+    </div>
+  </nav>
+  
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="auto-size-container">
+          <iframe id="ytplayer" type="text/html" class="auto-size-video" src="https://www.youtube.com/embed/{{videoID}}" frameborder="0" allowfullscreen></iframe>
+        </div>
+  
+        <!--<input type="text" placeholder="Add description here">-->
+  
+        <form id="add-description-form">
+          <div class="form-group">
+            <input id="add-description-input" data-id="{{videoID}}" type="text" class="form-control" placeholder="Add description here">
+          </div>
+          <!--<div class="form-group">-->
+          <!--  <button id="add-description-button" type="submit" class="btn btn-default"></button>-->
+          <!--</div>-->
+        </form>
+      </div>
+      <div class="col-md-4 video-list">
+      </div>
+    </div>
+  </div>
+  
+  
+  <script id="video-template" type="text/x-handlebars-template">
+    <div>
+      <div class="row">
+        {{curly}}#each videos}}
+        <div class="col-xs-12 xcol-md-6">
+          <div class="thumbnail">
+            <div class="row">
+              <div class="col-xs-5 xcol-md-12">
+                <a href="/watch/{{curly}}id}}"><img class="width-100" src="{{curly}}thumbnail}}" /></a>
+              </div>
+              <div class="col-xs-7 xcol-md-12">
+                <div class="caption">
+                  <h3 class="oneline"><a href="/watch/{{curly}}id}}">{{curly}}title}}</a></h3>
+                  <p>{{curly}}channelTitle}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        {{curly}}/each}}
+      </div>
+    </div>
+  </script>
+  
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.6/handlebars.js"></script>
+  <script type="text/javascript" src="../handlebars.js"></script>
+  <script type="text/javascript" src="../videoapp.js"></script>
 
 </body>
 </html>
