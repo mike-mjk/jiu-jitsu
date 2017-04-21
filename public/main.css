@@ -71,29 +71,40 @@ li {
     height: 2.5em;
     line-height: 1.2;
     }
+
+.oneline a {
+    color: black;
+}
+
+.caption p {
+    color: #767676;
+    /*margin: 0px;*/
+}
     
-    .thumbnail {
-      border: none;
-      margin: 0 -10px;
+    
+    
+.thumbnail {
+  border: none;
+  margin: 0 -10px 10px;
+}
+
+@media screen and (max-width: 640px) {
+  .thumbnail .caption {padding: 0;}
+  .thumbnail .oneline {margin: 0 0 5px; font-size: 0.9em; height: 2.15em;}
+  .thumbnail .btn {font-size: 0.75em; padding: 3px;}
+}
+
+@media screen and (min-width: 990px) {
+    h3 {
+        margin: 0;
+        font-size: 1em;
+    }
+    .thumbnail .caption {
+        padding: 0;
     }
     
-    @media screen and (max-width: 640px) {
-      .thumbnail .caption {padding: 0;}
-      .thumbnail .oneline {margin: 0 0 5px; font-size: 1.2em; height: 2.15em;}
-      .thumbnail .btn {font-size: 0.75em; padding: 3px;}
+    .homepage h3 {
+        font-size: 1.5em;
+        margin: 10px 0 0;
     }
-    
-    @media screen and (min-width: 990px) {
-        h3 {
-            margin: 0;
-            font-size: 1em;
-        }
-        .thumbnail .caption {
-            padding: 0;
-        }
-        
-        .homepage h3 {
-            font-size: 1.5em;
-            margin: 10px 0 0;
-        }
-    }
+}
