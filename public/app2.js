@@ -66,9 +66,24 @@ function onSubmit() {
     $('#add-video-form').on('submit', function(e){
         e.preventDefault();
         var videoId = $(this).find('#add-video-input').val();
+        $(this).find('#add-video-input').val('');
         videoId = videoId.trim();
         videoId = videoId.slice(-11);
         getDataFromApi(videoId);
+    });
+}
+
+function onDelete() {
+    $('.video-list').on('click', '.delete', function(e){
+        e.preventDefault();
+        var id = $(this).data('id');
+        console.log(id);
+        $.ajax('/videos/' + id, {
+            type: 'DELETE'
+        })
+        .done(function(){
+        getAndDisplayVideos();
+    });
     });
 }
 
@@ -125,5 +140,6 @@ function addVideo(video, getAndDisplayVideos) {
 $(function() {
 	getAndDisplayVideos();
 	onSubmit();
+	onDelete();
 });
 

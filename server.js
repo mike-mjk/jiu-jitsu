@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
+mongoose.Promise = Promise;
 
 var config = require('./config');
 
@@ -46,8 +47,8 @@ app.post('/videos', function(req, res){
 });
 
 app.put('/videos/:id/:field', function(req, res) {
-    console.log(req.params);
-    console.log(req.body);
+    // console.log(req.params);
+    // console.log(req.body);
     if (req.params.field == 'description') {
         Video.findOne({ id: req.params.id }, function (err, video){
           video.userDescription = req.body.description;
