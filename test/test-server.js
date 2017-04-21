@@ -38,7 +38,7 @@ describe('jiu-jitsu-test', function() {
             .end(function(err, res) {
                 res.should.have.status(200);
                 res.should.be.json;
-                // console.log(res.body);
+                console.log(res.body);
                 should.equal(res.body.length, 0);
                 done();
             });
