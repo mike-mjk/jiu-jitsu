@@ -5,8 +5,8 @@ deploy:
   provider: heroku
   api_key:
     secure: 562ed6a5-b712-4dbe-a5cd-d04f468ae877
-  app: travis-jiu-jitsu
+  app: jiu-jitsu
 services:
   - mongodb
 before_script:
-  - sleep 15
+  - sleep 5
