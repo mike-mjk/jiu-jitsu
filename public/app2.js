@@ -1,33 +1,3 @@
-var MOCK_VIDEOS = {
-    videos: [
-        {
-            id: "UNr5uyJ5fKM",
-            title: "Daily BJJ: No Gi Mount Basics + Armbar",
-            channelTitle: "Carnage BJJ",
-            thumbnail: "https://i.ytimg.com/vi/UNr5uyJ5fKM/mqdefault.jpg",
-            description: "description text 1",
-            tags: ['tag1', 'tag2', 'tag3'],
-            submitter: 'firstname lastname',
-            dateAdded: 1487961653997
-        },
-        {
-            id: "kkHzgDaSkHY",
-            title: "UnStoppable Arm Bar Setup From The Mount NO-GI Tutorial With Darren Goodall",
-            channelTitle: "VenomFIT Online Fitness Program",
-            thumbnail: "https://i.ytimg.com/vi/kkHzgDaSkHY/mqdefault.jpg",
-            description: "description text 2",
-            tags: ['tag1', 'tag2', 'tag3']
-        },
-        {
-            id: "61BH9zLZct0",
-            title: "Marcelo Garcia Standing Step Pass",
-            channelTitle: "Abu Enes",
-            thumbnail: "https://i.ytimg.com/vi/61BH9zLZct0/mqdefault.jpg",
-            description: "description text 2",
-            tags: ['tag1', 'tag2', 'tag3']
-        }
-        ]
-};
 
 //does an ajax call and passes response to displayCategoryVideos
 function getCategoryVideos(callbackFn) {
@@ -43,16 +13,6 @@ function getCategoryVideos(callbackFn) {
 //runs template() from handlebars.js on videos in mongo
 function displayCategoryVideos(data) {
     template(data);
-    // var correctList = $('#added-videos');
-    // correctList.html("");
-    // for (index in data) {
-    //     //var cat = data[index].category;
-        
-    //     var thumbnailLink = '<a href="/watch/' + data[index].id + '"><img src=' + data[index].thumbnail + '></a>';
-	   // var mongoId = data[index]._id;
-    //     console.log(mongoId);
-	   // correctList.append('<li id="' + mongoId + '">' + thumbnailLink + '</li>');
-    // }
 }
 
 //runs the get and display functions on document load
