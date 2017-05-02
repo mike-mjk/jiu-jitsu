@@ -14,8 +14,7 @@ var app = server.app;
 chai.use(chaiHttp);
 
 describe('jiu-jitsu-test', function() {
-    Video.collection.drop();
-    // push test
+    // Video.collection.drop();
     before(function(done) {
         server.runServer(function() {
             done();
