@@ -22,7 +22,9 @@ This app is designed to allow users a space for viewing and sharing curated jiu-
 <li>MongoDB</li>
 <li>Mocha + Chai</li>
 </ul>
-This app is built with HTML5, CSS, Bootstrap, Handlebars, Node, 
+
+# Live site
+Jiu-jitsu Tube can be accessed at https://jiu-jitsu.herokuapp.com/
 
 # Screenshots
 ![screenshot](http://i.imgur.com/LGIpiXW.png)
