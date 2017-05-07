@@ -10,9 +10,9 @@ function getCategoryVideos(callbackFn) {
     });
 }
 
-//runs template() from handlebars.js on videos in mongo
+//runs databaseTemplate() from handlebars.js on videos in mongo
 function displayCategoryVideos(data) {
-    template(data);
+    template(data, 'database');
 }
 
 //runs the get and display functions on document load
@@ -23,7 +23,7 @@ function getAndDisplayVideos() {
 
 //adds event listener to add video form and passes videoId to GetDataFromApi
 function onSubmit() {
-    $('#add-video-form').on('submit', function(e){
+    $('#add-video-form').on('submit', function(e) {
         e.preventDefault();
         var videoId = $(this).find('#add-video-input').val();
         $(this).find('#add-video-input').val('');
@@ -31,6 +31,55 @@ function onSubmit() {
         videoId = videoId.slice(-11);
         getDataFromApi(videoId);
     });
+}
+
+//adds event listener to search YouTube
+function onSearch() {
+    $('#search-youtube-form').on('submit', function(e) {
+        e.preventDefault();
+        var term = $(this).find('#search-youtube-input').val();
+        getSearchResults(term);
+    })
+}
+
+function getSearchResults (term) {
+    var baseURL = 'https://www.googleapis.com/youtube/v3/search';
+    var query = {
+        q: term,
+        part: 'snippet',
+        type: 'video',
+        maxResults: 15,
+        key: 'AIzaSyCIdQfwZ7qDSA1BhnfzEBa-6AB8ma8YY9k'
+    }
+    $.getJSON(baseURL, query, function(results) {
+        console.log('these are results', results);
+        var videos = getRelevantDataFromResponse(results);
+        console.log('these are the videos', videos);
+        template(videos, 'search');
+    })
+}
+
+function getRelevantDataFromResponse(results) {
+    console.log(results);
+    var videos = results.items.map(function(result) {
+        return ({
+            title: result.snippet.title,
+            channelTitle: result.snippet.channelTitle,
+            id: result.id.videoId,
+            thumbnail: result.snippet.thumbnails.medium.url
+        })
+    })
+
+    return videos;
+
+    // return (
+    // [{
+    //     title: 'my video',
+    //     channelTitle: 'nothing dude',
+    //     id: 'ZM_8-c1EqOY',
+    //     thumbnail: 'https://i.ytimg.com/vi/ZM_8-c1EqOY/mqdefault.jpg'
+    // }]
+    // )
 }
 
 function onDelete() {
@@ -100,6 +149,7 @@ function addVideo(video, getAndDisplayVideos) {
 $(function() {
 	getAndDisplayVideos();
 	onSubmit();
+    onSearch();
 	onDelete();
 });
 

@@ -33,51 +33,34 @@
 
     </div>
   </nav>
-  
-  <div class="container">
-    <form id="add-video-form">
-      <div class="form-group">
-        <input id="add-video-input" type="text" class="form-control" placeholder="Add video by pasting link here">
-      </div>
-      <div class="form-group">
-        <button id="add-video-button" type="submit" class="btn btn-default">Submit</button>
-      </div>
-      
-    </form>
-  </div>
-  
+    
   <div class="container video-list homepage">
     <!--<ol id="added-videos">-->
       
     <!--</ol>-->
   </div>
   
-  
-  <script id="database-template" type="text/x-handlebars-template">
+  <script id="video-template-mike" type="text/x-handlebars-template">
   <div class="container">
-    <div class="row">
+    <ol>
       {{#each videos}} 
-        <div class="col-xs-12 col-md-6">
-          <div class="thumbnail">
-            <div class="row">
-              <div class="col-xs-5 col-md-12">
-                <a href="/watch/{{id}}"><img class="width-100" src="{{thumbnail}}" /></a>
-              </div>
-              <div class="col-xs-7 col-md-12">
-                <div class="caption">
-                  <h3 class="oneline"><a href="/watch/{{id}}">{{title}}</a></h3>
-                  <p>{{channelTitle}}</p>
-                  <p><button data-id={{id}} class="delete btn btn-danger btn-xs" role="button"><i class="fa fa-times"></i> Delete Video</button></p>
-                </div>
-              </div>
-            </div>
-          </div>
+      <li>
+      <div class="-row">
+        <div class="col-xs-5 col-md-5 col-md-offset-1 no-padding-lr">
+          <a href="/watch/{{id}}"><span><img class="width-100" src="{{thumbnail}}"></span></a>
+          <a href="/watch/{{id}}"> <div class="two-lines hidden-xs hidden-sm"><span class="title">{{title}}</span></div> <span class="channel-title">{{channelTitle}}</span></a>
         </div>
+        <div class="col-xs-7 hidden-md hidden-lg">
+          <a href="/watch/{{id}}"> <div class="two-lines"><span class="title">{{title}}</span></div> <span class="channel-title">{{channelTitle}}</span></a>
+          <br>
+        </div>
+      </div>
+      </li>
       {{/each}}
-    </div>
+    </ol>
   </div>
   </script>
-
+  
   <script id="search-template" type="text/x-handlebars-template">
   <div class="container">
     <div class="row">
@@ -101,6 +84,7 @@
     </div>
   </div>
   </script>
+
   
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
   <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

@@ -45,7 +45,7 @@ function getCategoryVideos(callbackFn) {
 
 //runs template() from handlebars.js on videos in mongo
 function displayCategoryVideos(data) {
-    template(data);
+    template(data, 'database');
     // var correctList = $('#added-videos');
     // correctList.html("");
     // for (index in data) {

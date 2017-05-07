@@ -1,6 +1,13 @@
-function template(videos) {
+function template(videos, role) {
   // Grab the template script
-  var theTemplateScript = $("#video-template").html();
+  var theTemplateScript;
+  if (role == 'database') {
+    theTemplateScript = $("#database-template").html();
+ }
+  else if (role == 'search') {
+    console.log('search is the role');
+    theTemplateScript = $("#search-template").html();
+  }
 
   // Compile the template
   var theTemplate = Handlebars.compile(theTemplateScript);
